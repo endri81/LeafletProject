@@ -1,0 +1,40 @@
+---
+title: "My hometown Korca"
+author: "Endri Raco"
+date: "4/14/2020"
+output: html_document
+---
+
+```{r include = TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+library(leaflet)
+library(dplyr)
+library(htmltools)
+```
+```{r,, echo=FALSE}
+df <- read.csv(textConnection(
+"Name,Lat,Long
+City Bazar, 40.618582, 20.774524
+Youth Park, 40.627247, 20.787656
+University, 40.627622, 20.785414
+Stadion,  40.626303, 20.782839
+Mitropolia, 40.617937, 20.782802
+Cathedral, 40.615966, 20.780688
+Education Museum,  40.615966, 20.780688
+Majestic Cinema, 40.617945, 20.782405"
+))
+```
+
+```{r, , echo=FALSE}
+nstar <- makeIcon(
+  iconUrl = "./nstar.png",
+  iconWidth = 20, iconHeight = 20
+)
+```
+
+
+Please take a virtual journey in my hometown Korca this Tuesday on 14 April 2020
+
+```{r, , echo=FALSE}
+leaflet(df) %>% addTiles() %>%
+  addMarkers(~Long, ~Lat, popup = ~htmlEscape(Name), icon = nstar)
+```
